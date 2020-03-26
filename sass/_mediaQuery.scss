@@ -1,0 +1,723 @@
+
+@media (max-width:992px) {
+    .MuiChip-deleteIcon{
+        margin: 0 4px!important;
+        width: 15px !important;
+        height: 15px !important;
+    }
+    .search-booking {
+        padding: 45px 15px!important;
+        padding-bottom: 10px!important;
+    }
+    .pr-5-s {
+        padding-right: 5px !important;
+    }
+    .image-gallery-content .image-gallery-slide .image-gallery-image {
+        height: 200px;
+    }
+
+
+    .filter-btn-xs {
+        background: #73c9ca;
+        color: white;
+        border-radius: 50%;
+        padding: 8px;
+        position: fixed;
+        right: 0;
+        height: 40px;
+        bottom: 0;
+        width: 40px;
+    }
+    .pd015-xs {
+        padding: 0 15px;
+    }
+    .pd030-xs {
+        padding: 0 30px;
+    }
+    .pr-0-xs {
+        padding-right: 0;
+    }
+    .tourbooking {
+        .card-col {
+            min-width: 100% !important;
+        }
+        .filter-toggle {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            .filter-bg {
+                background-color: #f7f7f7;
+                width: 85%;
+                height: 100%;
+                text-align: right;
+                .cancle-btn {
+                    font-size: 20px;
+                    color: gray;
+                    margin: 16px;
+                    margin-top: 10px;
+                }
+                .filter-box {
+                    .card {
+                        box-shadow: none !important;
+                    }
+                }
+            }
+        }
+        .result-box {
+            width: 95%;
+            margin: auto;
+            .flight-table {
+                padding-bottom: 20px;
+                h6 {
+                    color: #73c9ca!important;
+                    padding-top: 15px;
+                }
+            }
+            .transfer-line {
+                margin-right: 10%!important;
+            }
+            .bottom-line .more-collapse {
+                padding-top: 5px!important;
+                font-size: 11px!important;
+                svg {
+                    font-size: 12px!important;
+                }
+            }
+          
+            
+            h4 {
+                padding-top: 8px !important;
+            }
+            .img-part {
+                height: 200px!important;
+                img {
+                    height: 200px!important;
+                }
+            }
+        }
+    }
+    .tour-payment .payment {
+        width: 95%!important;
+        margin: 20px auto!important;
+        .timer {
+            margin: auto;
+            margin-top: 20px;
+        }
+        .chosen-card {
+            .left-part .change-btn {
+                width: 75% !important;
+                bottom: 7px;
+                position: absolute;
+            }
+            .flight-table {
+                padding-bottom: 20px;
+            }
+            .bottom-line .more-collapse {
+                padding-top: 5px !important;
+                font-size: 11px !important;
+                svg {
+                    font-size: 12px !important;
+                }
+            }
+            .img-part{
+                height: 200px!important;
+                img {
+                    height: 200px!important;
+                }
+            } 
+            .tours-tag {
+                text-align: center !important;
+                .modal-btn {
+                    display: inline-block;
+                    width: 90%;
+                    background-color: transparent !important;
+                    color: #fba717;
+                    border: 1px solid;
+                    box-shadow: none;
+                    padding: 1px 5px;
+                    margin: 4px;
+                    width: 31%;
+                }
+                .tour-rule-btn {
+                    width: 31%;
+                    // width: 90%;
+                    text-align: center;
+                    display: inline-block;
+                    font-size: 11px;
+                    margin: 4px;
+                    padding: 1px 5px;
+                    background-color: white;
+                    margin-top: 10px;
+                    // margin-left: 9px;
+                    /* padding-bottom: 2px; */
+                    border: 1px solid #d6e8e8;
+                    color: #08a496;
+                    position: relative;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .tours-tab .tours-card {
+        padding: 5px !important;
+        .card-body {
+            padding: 15px 12px;
+            .card-title a {
+                min-height: 47px;
+                display: block;
+            }
+        }
+    }
+    .original-nav {
+        z-index: 1000 !important;
+    }
+    .searchbox-p .searchbox .search-box-tabs {
+        top: 0 !important;
+    }
+    .searchbox-p .searchbox .search-box-tabs .md-tabs {
+        width: 100%;
+    }
+    .navbar{
+        ul {
+            padding: 0;
+        }
+        .right-nav {
+            .nav-item{
+                padding: 5px;
+                margin: 0 !important;
+                text-align: center;
+                border-top: 1px solid gainsboro;
+                margin-top: 7px !important;
+                &:last-child {
+                    border-top: 0;
+                    margin-top: 0 !important;
+                    padding: 0;
+                }
+                &.border-left {
+                    border-left: none!important;
+                   
+                }
+            }
+        }
+        .left-nav {
+            .nav-item {
+                padding: 5px;
+                margin-top: 7px !important;
+                &.border-left {
+                    border-left: none!important;
+                   
+                }
+            }
+        }
+      
+         .navbar-toggler {
+            border-color: rgb(226, 222, 218);
+            border-width: 1px !important;
+        }
+    } 
+    .tours-tab .MuiTabs-flexContainer .MuiTab-root {
+        min-width: 40px;
+        padding: 2px;
+        font-size: 10px;
+    }
+    .tours-tab .tab-img {
+        width: 50px;
+        height: 50px;
+    }
+    .special-cards .card2 button {
+     width: 100%;   
+    }
+    .weblog-grid {
+        .grid-container {
+            .grid-item {
+                width: 100%;
+                display: block;
+                position: relative;
+                margin-bottom: 5px;
+                img {
+                    width: 100%;
+                }
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    font-size: 17px;
+                    background: #685f5f6b;
+                    color: white;
+                    padding: 10px 10px 0 0;
+                }
+            }
+        }
+    }
+    .special-offers .special-kite-img {
+        width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .searchbox-p .searchbox{
+        .tab-card {
+            padding: 25px 30px !important;
+        }
+        .md-tabs {
+            position: relative !important;
+            left: 0 !important;
+            display: flex;
+            justify-content: space-around;
+            -webkit-flex-flow: row wrap;
+            top:  0 !important;
+            .nav-item a {
+                padding: 15px 0!important;
+            }
+        }
+    } 
+
+    .prl-25-xs {
+        padding: 0 25px;
+    }
+    .searchbox-p .searchbox .tab-card .search-dropdown .dropdown {
+        width: 100%;
+    }
+    .none-s {
+        display: none !important;
+    }
+}
+/*mobile*/
+@media (max-width:790px) {
+    .tours-tab .card-img-top {
+        height: 140px !important;
+    }
+    .card5 .MuiExpansionPanelSummary-root {
+        padding: 0 !important;
+    }
+    .image-gallery-thumbnail .image-gallery-thumbnail-image {
+        height: 45px;
+    }
+    .info-cards {
+        width: 100% !important;
+        .card4 {
+            .hotel-info-row {
+                .hotel-title {
+                    padding-right: 15px;
+                    .right-part {
+                        width: 100%;
+                    }
+                }
+                .hotel-ul {
+                    width: 100%;
+                    padding-right: 10px;
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+    .search-booking .MuiFab-extended {
+        background-color: #73c9ca!important;
+    }
+    .tours-tag{
+        padding-top: 0!important;
+        text-align: center!important;
+        span {
+            width: 31% !important;
+        }
+        .modal-btn {
+            display: inline-block;
+            // width: auto !important;
+            background-color: transparent !important;
+            color: #fba717;
+            border: 1px solid;
+            box-shadow: none;
+            padding: 1px 5px!important;
+            margin: 4px!important;
+            width: 31% !important;
+        }
+        .tour-rule-btn {
+            // width: 90%;
+            text-align: center;
+            display: inline;
+            font-size: 11px !important;
+            margin: 4px !important;
+            padding: 1px 5px;
+            background-color: white !important;
+            margin-top: 10px;
+            // margin-left: 9px;
+            /* padding-bottom: 2px; */
+            border: 1px solid #d6e8e8;
+            color: #08a496 !important;
+            position: relative;
+            cursor: pointer;
+        }
+    } 
+    .left-part {
+        width: 100%!important;
+        left: 0;
+        right: 0;
+        .tag {
+            text-align: center;
+        }
+        .reserve-btn {
+            width: 75%!important;
+            bottom: 7px;
+            position: absolute;
+        }
+    }
+    .inline-block-xs {
+        display: inline-block !important;
+    }
+    .inline-xs {
+        display: inline !important;
+    }
+    .none-xs {
+        display: none !important;
+    }
+    .tourbooking {
+        .sort .sort-select {
+            width: 100% !important;
+        }
+        .result-box {
+            .service-tag div {
+                margin: auto;
+            }
+            .left-part {
+                position: relative !important;
+                margin: auto;
+            }
+            .tours-tag {
+                text-align: center;
+            }
+        }
+    }
+    .search-booking {
+        padding: 35px 40px!important;
+        .inputgroups {
+            .airport-col {
+                position: relative;
+                .input-group {
+                    width: 100% !important;
+                    border: 1px solid gainsboro;
+                    padding-left: 0;
+                    margin-bottom: 5px;
+                }
+                .input-btn {
+                    width: 35px!important;
+                    height: 35px;
+                    float: none!important;
+                    padding: 0!important;
+                    left: -16px;
+                    margin-left: 0 !important;
+                    z-index: 100;
+                    top: 25%;
+                    border: 1px solid #d7d7d7;
+                    border-radius: 50%;
+                    position: absolute;
+                }
+            }
+            .date-col {
+                .input-group {
+                    width: 100%!important;
+                    border: 1px solid gainsboro;
+                    padding: 0!important;
+                    margin-bottom: 5px;
+                    .input-group-append {
+                        margin-left: 0 !important;
+                        width: 100%!important;
+                        .input-group-text {
+                            width: 100%!important;
+                        }
+                    }
+                }
+                .input-btn {
+                    width: 100% !important;
+                }
+            }
+        }
+        .MuiFab-extended {
+            left: 0 !important;
+            a {
+                color: white;
+            }
+        }
+        .search-dropdown {
+            .tour-type {
+                width: 100%;
+                .MuiFormControl-root {
+                    min-width: 100% !important;
+                }
+            }
+            .dropdown {
+                width: 100% !important;
+            }
+            .passenger-number .dropdown-toggle {
+                padding: 7px 10px !important;
+                padding-left: 9px !important;
+                .total-num {
+                    left: 12px;
+                }
+            }
+        }
+    }
+    .searchbox-p {
+        padding-top: 16% !important;
+        .searchbox .tab-card {
+            .inputgroups {
+                .airport-col {
+                    position: relative;
+                    .input-group {
+                        width: 100% !important;
+                        border: 1px solid gainsboro;
+                        padding-left: 0;
+                        margin-bottom: 5px;
+                    }
+                    .input-btn {
+                        width: 35px!important;
+                        height: 35px;
+                        float: none!important;
+                        padding: 0!important;
+                        left: -16px;
+                        margin-left: 0 !important;
+                        z-index: 100;
+                        top: 25%;
+                        border: 1px solid #d7d7d7;
+                        border-radius: 50%;
+                        position: absolute;
+                    }
+                }
+                .date-col {
+                    .input-group {
+                        width: 100%!important;
+                        border: 1px solid gainsboro;
+                        padding-left: 1px;
+                        margin-bottom: 5px;
+                        .input-group-append {
+                            width: 100%!important;
+                            .input-group-text {
+                                width: 100%!important;
+                            }
+                        }
+                    }
+                }
+            }
+            .MuiFab-extended {
+                left: 20% !important;
+            }
+            .search-dropdown .passenger-number .dropdown-toggle {
+                padding: 7px 10px !important;
+                padding-left: 20px !important;
+                .total-num {
+                    left: 12px;
+                }
+            }
+        }
+  
+    }
+    .background-text {
+        margin-right: 7% !important;
+        padding-top: 80px !important;
+        img {
+            width: 225px !important;
+        }
+    }
+    .search-bg {
+        height: 560px !important;
+    }
+   
+}
+//desktop
+@media (min-width:992px) {
+    .image-gallery-thumbnail .image-gallery-thumbnail-image {
+        height: 60px;
+    }
+    .mobileContract{
+        width: 95%;  
+    }
+    .tour-payment .payment .info-form .or {
+        position: absolute;
+        left: 0;
+        bottom: 20px;
+    }
+    .image-gallery-content .image-gallery-slide .image-gallery-image {
+        height: 500px;
+    }
+    .pr-0-lg {
+        padding-right: 0;
+    }
+    .MuiChip-deleteIcon{
+        margin: 0  !important;
+        width: 14px !important;
+        height: 14px !important;
+        margin-left: 2px !important;
+    }
+    .no-padding-lg {
+        padding: 0;
+    }
+    .tourbooking .result-box .price-table {
+        padding-left: 0;
+    }
+    .none-lg {
+        display: none !important;
+    }
+    .searchbox-p .searchbox .search-box-tabs .md-tabs {
+        width: 50%;
+    }
+    .tours-tab .MuiTabs-flexContainer .MuiTab-root {
+        min-width: 145px;
+    }
+    .tours-tab .tab-img {
+        width: 110px;
+        height: 110px;
+    }
+    .special-cards .card2 button {
+        width: 80%;
+    }
+    .weblog-grid {
+        .grid-container {
+            display: grid;
+            grid-gap: 5px;
+            padding: 5px;
+            margin-top: 15px;
+            grid-template-rows: 190px 190px 190px 190px;
+            overflow: hidden;
+            .grid-item {
+                background-color: rgba(255, 255, 255, 0.8);
+                text-align: center;
+                padding: 0;
+                font-size: 30px;
+                position: relative;
+                overflow: hidden;
+                span{
+                    position: absolute;
+                    z-index: 10;
+                    right: 18px;
+                    top: 10px;
+                    color: white;
+                    font-size: 15px;
+                }
+                // a {
+                //     position: absolute;
+                //     left: 0;
+                //     right: 0;
+                //     top: 0;
+                //     bottom: 0;
+                // }
+                &:hover {
+                    &::before {
+                        background: rgba(0, 0, 0, 0.32);
+                    }
+                    img {
+                        -webkit-transfor: scale(1.1);
+                        transform: scale(1.1);
+                        -webkit-transition: .3s ease-in-out;
+                        transition: .3s ease-in-out;
+                        
+                    }
+                }
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                    background: rgba(0, 0, 0, 0.11);
+                    z-index: 10;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+                &.item1 {
+                    grid-column: 1 / span 2;
+                    grid-row: 1 / span 2 ;
+                    span {
+                        color: black;
+                    }
+                }
+                &.item3 {
+                    span {
+                        color: black;
+                    }
+                }
+                &.item4 {
+                    grid-column: 3 /span 2;
+                    grid-row: 2;
+                }
+                &.item5 {
+                    grid-column: 1 / span 2;
+                    grid-row: 3;
+                }
+                &.item6 {
+                    grid-column: 3 / span 2;
+                    grid-row: 3 / span 2;
+    
+                }
+                &.item7 {
+                    grid-column: 1 / span 2;
+                    grid-row: 4;
+                    span {
+                        color: black;
+                    }
+                }
+    
+            }
+        }
+    }
+    .searchbox-p .searchbox .tab-card .search-dropdown .dropdown {
+        width: 50%;
+    }
+    // .slick-track .slick-slide{
+    //     width: 261px !important;
+    // }
+    .pl-5-lg {
+        padding-left: 5px!important;
+    }
+    .pr-5-lg {
+        padding-right: 5px!important;
+    }
+    .no-padding-lg {
+        padding: 0 !important;
+    }
+    .pr-5-lg {
+        padding-right: 5px;
+    }
+    .none-lg {
+        display: none !important;
+    }
+}
+// @media (min-width: 1200px) {
+//     .slick-track .slick-slide {
+//         width: 321px !important;
+//     }
+
+// }
+// @media (min-width: 600px) {
+//     .slick-track .slick-slide {
+//         width: 181px !important;
+//     }
+// }
+// @media (min-width: 1400px) {
+//     .container {
+//       max-width: 1370px;
+//     }
+//   }
+  @media only screen  and (min-width: 1900px) {
+    .container {
+      max-width: 1570px;
+    }
+    .search-bg {
+        width: 100%;
+        height: 560px!important;
+    }
+    // .slick-track .slick-slide {
+    //     width: 400px !important;
+    // }
+  }
+//   @media screen and (min-width: 1900px) {
+//     .container {
+//       width: 1870px;
+//     }
+//   }

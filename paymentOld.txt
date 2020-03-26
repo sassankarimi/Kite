@@ -1,0 +1,1371 @@
+import React, { useState } from 'react';
+
+//redux
+import { connect } from "react-redux";
+
+//UI Libraries
+import { Container, } from 'reactstrap';
+import { MDBCard, MDBCardBody} from 'mdbreact';
+import Countdown from 'react-countdown-now';
+import { IoMdSearch,IoIosAirplane,IoIosWarning,IoMdInformationCircle } from "react-icons/io";
+import { TiSortAlphabetically } from "react-icons/ti";
+import { Collapse } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+
+//components
+import ChosenCard from "./ChosenCard";
+import TourSearch from './toursearch';
+import Countries from '../../Countries';
+
+//axios
+import axios from 'axios';
+import Ports from '../../ports';
+
+//utilities
+import { numToWord, personType,latinOrPersianValidate,requiredInput,validateEmail, just_persian, isRealValue, mobileFormatInputValidate, mobile_format} from '../../Functions';
+import NumberFormat from 'react-number-format';
+
+// Random component
+const Completionist = () => <span>You are good to go!</span>;
+// Renderer callback with condition
+const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+        // Render a complete state
+        return <Completionist />;
+    } else {
+        // Render a countdown
+        return <span>0 : 0 : {minutes} : {seconds}</span>;
+    }
+};
+
+const InfoForm = (props) => {
+    const [iAm, setIAm] = useState(true);
+    const [iAmnot, setIAmnot] = useState(false);
+    const [before, setBefore] = useState(false);
+    const [customerFlag, setcustomerFlag] = useState(true);
+    const {paymentObj}=props;
+    const [formAdult, setFormAdult] = useState(new Array(Math.abs(props.paymentObj[0].Adult)).fill(0).map((value, i) => value = {
+        personType: "adult",
+        FirstName: "",
+        LastName: "",
+        // PersianFirstName: "ساسان",
+        // PersianLastName: "کریمی",
+        CellPhoneNumber: "",
+        Gender: 1,
+        AgeRange: 0,
+        Nationality: "IRAN",
+        NationalityCode:"IR",
+        BirthDate: "",
+        birthType: 0,
+        bDay: "",
+        bMonth: "",
+        bYear: "",
+        cardType: 0,
+        PassportNo: "",
+        PassportExpirationDate: "",
+        passExType: 1,
+        pDay: "",
+        pMonth: "",
+        pYear: "",
+        melliCode: "",
+        Type: "Package",
+        Room: 1,
+        Price:props.paymentObj[0].RoomPrices[0].Adult,
+        PackageFlightId: props.paymentObj[0].FlightID,
+        Insurance: props.paymentObj[0].Insurance,
+        InsuranceId: props.paymentObj[0].InsuranceId,
+        //default insurance price is adult
+        InsurancePrice: props.paymentObj[0].InsuranceAdultPrice,
+        Visa: props.paymentObj[0].Visa,
+        VisaPrice: props.paymentObj[0].VisaPrice,
+        VisaID: props.paymentObj[0].VisaId,
+        //i dont know about type and value of Services data.(just for exist for Api)
+        Services:props.paymentObj[0].Services,
+
+    }));
+    const [formChild1, setFormChild1] = useState(new Array(Math.abs(props.paymentObj[0].Child1)).fill(0).map((value, i) => value = {
+        personType: "child1",
+        FirstName: "",
+        LastName: "",
+        // PersianFirstName: "",
+        // PersianLastName: "",
+        CellPhoneNumber: "",
+        Gender: 1,
+        AgeRange: 1,
+        Nationality: "IRAN",
+        NationalityCode:"IR",
+        BirthDate: "",
+        birthType: 0,
+        bDay: "",
+        bMonth: "",
+        bYear: "",
+        cardType: 0,
+        PassportNo: "",
+        PassportExpirationDate: "",
+        passExType: 1,
+        pDay: "",
+        pMonth: "",
+        pYear: "",
+        melliCode: "",
+        Type: "Package",
+        Room: 1,
+        Price:props.paymentObj[0].RoomPrices[0].Child1,
+        PackageFlightId: props.paymentObj[0].FlightID,
+        Insurance: props.paymentObj[0].Insurance,
+        InsuranceId: props.paymentObj[0].InsuranceId,
+        //default insurance price is adult
+        InsurancePrice: props.paymentObj[0].InsuranceAdultPrice,
+        Visa: props.paymentObj[0].Visa,
+        VisaPrice: props.paymentObj[0].VisaPrice,
+        VisaID: props.paymentObj[0].VisaId,
+        //i dont know about type and value of Services data.(just for exist for Api)
+        Services:props.paymentObj[0].Services,
+    }));
+    const [formChild2, setFormChild2] = useState(new Array(Math.abs(props.paymentObj[0].Child2)).fill(0).map((value, i) => value = {
+        personType: "child2",
+        FirstName: "",
+        LastName: "",
+        // PersianFirstName: "",
+        // PersianLastName: "",
+        CellPhoneNumber: "",
+        Gender: 1,
+        AgeRange: 2,
+        Nationality: "IRAN",
+        NationalityCode:"IR",
+        BirthDate: "",
+        birthType: 0,
+        bDay: "",
+        bMonth: "",
+        bYear: "",
+        cardType: 0,
+        PassportNo: "",
+        PassportExpirationDate: "",
+        passExType: 1,
+        pDay: "",
+        pMonth: "",
+        pYear: "",
+        melliCode: "",
+        Type: "Package",
+        Room: 1,
+        Price:props.paymentObj[0].RoomPrices[0].Child2,
+        PackageFlightId: props.paymentObj[0].FlightID,
+        Insurance: props.paymentObj[0].Insurance,
+        InsuranceId: props.paymentObj[0].InsuranceId,
+        //default insurance price is adult
+        InsurancePrice: props.paymentObj[0].InsuranceAdultPrice,
+        Visa: props.paymentObj[0].Visa,
+        VisaPrice: props.paymentObj[0].VisaPrice,
+        VisaID: props.paymentObj[0].VisaId,
+    }));
+    const [formInfant, setFormInfant] = useState(new Array(Math.abs(props.paymentObj[0].Infant)).fill(0).map((value, i) => value = {
+        personType: "infant",
+        FirstName: "",
+        LastName: "",
+        // PersianFirstName: "",
+        // PersianLastName: "",
+        CellPhoneNumber: "",
+        Gender: 1,
+        AgeRange: 3,
+        Nationality: "IRAN",
+        NationalityCode:"IR",
+        BirthDate: "",
+        birthType: 0,
+        bDay: "",
+        bMonth: "",
+        bYear: "",
+        cardType: 0,
+        PassportNo: "",
+        PassportExpirationDate: "",
+        passExType: 1,
+        pDay: "",
+        pMonth: "",
+        pYear: "",
+        melliCode: "",
+        Type: "Package",
+        Room: 1,
+        Price:props.paymentObj[0].RoomPrices[0].Infant,
+        PackageFlightId: props.paymentObj[0].FlightID,
+        InsuranceId: props.paymentObj[0].InsuranceId,
+        Insurance: props.paymentObj[0].Insurance,
+        //default insurance price is adult
+        InsurancePrice: props.paymentObj[0].InsuranceAdultPrice,
+        Visa: props.paymentObj[0].Visa,
+        VisaPrice: props.paymentObj[0].VisaPrice,
+        VisaID: props.paymentObj[0].VisaId,
+    }));
+    const errorBorder = {
+        border: "1px solid red",
+    };
+    const allPassengers=formAdult.concat(formChild1, formChild2, formInfant);
+    const [passengers, setPassengers] = useState(allPassengers);
+    const[customer,setCustomer]=useState({
+        CustomerId:"",
+        FirstName:"",
+        LastName:"",
+        Email:"",
+        MobileNumber:"",
+        From:"Site",
+        Code:""
+    })
+    const[nameError,setNameError]=useState(new Array(allPassengers.length).fill(false));
+    const[latinNameError,setLatinNameError]=useState(new Array(allPassengers.length).fill(false));
+    const[familyError,setFamilyError]=useState(new Array(allPassengers.length).fill(false));
+    const[latinFamilyError,setLatinFamilyError]=useState(new Array(allPassengers.length).fill(false));
+    const[persianNameReqError,setPersianNameReqError]=useState(new Array(allPassengers.length).fill(false));
+    const[persianNameError,setPersianNameError]=useState(new Array(allPassengers.length).fill(false));
+    const[persianFamilyReqError,setPersianFamilyReqError]=useState(new Array(allPassengers.length).fill(false));
+    const[persianFamilyError,setPersianFamilyError]=useState(new Array(allPassengers.length).fill(false));
+    const[mobileFormatError,setMobileFormatError]=useState(new Array(allPassengers.length).fill(false));
+    const[mobileReqError,setMobileReqError]=useState(new Array(allPassengers.length).fill(false));
+    const[submiterEmailError,setSubmiterEmailError]=useState(false);
+    const[submiterEmailFormatError,setSubmiterEmailFormatError]=useState(false);
+    const[submiterNameError,setSubmiterNameError]=useState(false);
+    const[submiterFamilyError,setSubmiterFamilyError]=useState(false);
+    const[submiterMobileError,setSubmiterMobileError]=useState(false);
+    const[submiterMobileFormatError,setSubmiterMobileFormatError]=useState(false);
+    const[contractError,setContractError]=useState(false);
+    const[customerType,setCustomerType]=useState(0)
+    const roomCount = props.searchParams.roomRules.split(",");
+    function onSetIamChanged() {
+        setIAmnot(false);
+        setBefore(false);
+        setIAm(true);
+        setCustomerType(0);
+    }
+    function onSetIamNotChanged() {
+        setIAm(false);
+        setBefore(false);
+        setIAmnot(true);
+        setCustomerType(1);
+    }
+    function onSetBeforeChanged() {
+        setIAm(false);
+        setIAmnot(false);
+        setBefore(true);
+        setCustomerType(2);
+    }
+    function handleInputChange(e, idx, type) {
+        let nextPassenger = passengers.slice();
+        nextPassenger[idx].id = idx;
+         let value=e.target.value;
+        if (type === "FirstName") {
+            nextPassenger[idx].FirstName = value;
+            //check latin
+            let latin=latinNameError;
+            let latinFlag=(just_persian(value)?true:false)
+            latin[idx]=latinFlag;
+            setLatinNameError(latin.slice());
+            //check required
+            let req=nameError;
+            let reqFlag=(isRealValue(value)?false:true)
+            req[idx]=reqFlag;
+            setNameError(req.slice());
+            }
+        if (type === "LastName")
+        {
+                nextPassenger[idx].LastName = value;
+                //check latin
+                let latin=latinFamilyError;
+                let latinFlag=(just_persian(value)?true:false)
+                latin[idx]=latinFlag;
+                setLatinFamilyError(latin.slice());
+                //check required
+                let req=familyError;
+                let reqFlag=(isRealValue(value)?false:true)
+                req[idx]=reqFlag;
+                setFamilyError(req.slice());
+        }
+        if (type === "PersianFirstName")
+    {
+
+        nextPassenger[idx].PersianFirstName = value;
+                        //check latin
+                        let latin=persianNameError;
+                        let latinFlag=(just_persian(value)?false:true)
+                        if(!isRealValue(value))
+                        latinFlag=false
+                        latin[idx]=latinFlag;
+                        setPersianNameError(latin.slice());
+                        //check required
+                        let req=persianNameReqError;
+                        let reqFlag=(isRealValue(value)?false:true)
+                        req[idx]=reqFlag;
+                        setPersianNameReqError(req.slice());
+    }
+        if (type === "PersianLastName")
+        {
+            nextPassenger[idx].PersianLastName = value;
+            //check latin
+            let latin=persianFamilyError;
+            let latinFlag=(just_persian(value)?false:true)
+            if(!isRealValue(value))
+            latinFlag=false
+            latin[idx]=latinFlag;
+            setPersianFamilyError(latin.slice());
+            //check required
+            let req=persianFamilyReqError;
+            let reqFlag=(isRealValue(value)?false:true)
+            req[idx]=reqFlag;
+            setPersianFamilyReqError(req.slice());
+        }
+        if (type === "CellPhoneNumber")
+            {
+             nextPassenger[idx].CellPhoneNumber =value;
+             //check required
+             let req=mobileReqError;
+             let reqFlag=(isRealValue(value)?false:true)
+             req[idx]=reqFlag;
+             setMobileReqError(req.slice());
+             //check format
+             let format=mobileFormatError;
+             let formatFlag=(mobile_format(value)?false:true)
+             if(!isRealValue(value))
+             formatFlag=false
+             format[idx]=formatFlag;
+             setMobileFormatError(format.slice());
+
+            }
+        if (type === "Gender")
+            nextPassenger[idx].Gender = value;
+        if (type === "Nationality")
+       { var option_user_selection = e.target.options[e.target.selectedIndex ].text
+                nextPassenger[idx].Nationality = option_user_selection;
+                nextPassenger[idx].NationalityCode = value}
+        if (type === "bDay" || type === "bMonth" || type === "bYear") {
+            if (type === "bDay")
+                nextPassenger[idx].bDay = value;
+            if (type === "bMonth")
+                nextPassenger[idx].bMonth = value;
+            if (type === "bYear")
+                nextPassenger[idx].bYear = value;
+            nextPassenger[idx].BirthDate = nextPassenger[idx].bYear + "/" + nextPassenger[idx].bMonth + "/" + nextPassenger[idx].bDay
+        }
+        if (type === "pDay" || type === "pMonth" || type === "pYear") {
+            if (type === "pDay")
+                nextPassenger[idx].pDay =value;
+            if (type === "pMonth")
+                nextPassenger[idx].pMonth = value;
+            if (type === "pYear")
+                nextPassenger[idx].pYear =value;
+            nextPassenger[idx].PassportExpirationDate = nextPassenger[idx].pYear + "/" + nextPassenger[idx].pMonth + "/" + nextPassenger[idx].pDay
+        }
+
+        if (type === "cardType")
+            nextPassenger[idx].cardType = parseInt(value);
+        if (type === "PassportNo")
+            nextPassenger[idx].PassportNo = value;
+        if (type === "PassportExpirationDate")
+            nextPassenger[idx].PassportExpirationDate = value;
+        if (type === "melliCode")
+            nextPassenger[idx].melliCode = value;
+        if (type === "Room") {
+            nextPassenger[idx].Room = parseInt(value);
+            if( nextPassenger[idx].personType==="adult")
+            nextPassenger[idx].Price=props.paymentObj[0].RoomPrices[value-1].Adult
+            if( nextPassenger[idx].personType==="child1")
+            nextPassenger[idx].Price=props.paymentObj[0].RoomPrices[value-1].Child1
+            if( nextPassenger[idx].personType==="child2")
+            nextPassenger[idx].Price=props.paymentObj[0].RoomPrices[value-1].Child2
+            if( nextPassenger[idx].personType==="infant")
+            nextPassenger[idx].Price=props.paymentObj[0].RoomPrices[value-1].Infant
+        }
+        setPassengers(nextPassenger)
+    }
+    function HotelPriceFormat(num) {
+
+        return <NumberFormat value={num} displayType={'text'} thousandSeparator={true} renderText={num => <div>{num}</div>} />
+    }
+    /*function handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log("name", name);
+        console.log("formAdult", formAdult);
+        setFormAdult(prevState => {
+            // Object.assign would also work
+            return { ...prevState, [name]: value };
+        })
+
+    }*/
+    async function handleForm(e) {
+        e.preventDefault();
+        //set submit flag if true do it insert
+        var submitFlag = true;
+
+        //submiter (customer) Validation 
+        let emailFlag= (isRealValue(customer.Email))?false:true;
+        setSubmiterEmailError(emailFlag);
+        let emailFormatFlag=false;
+        //first check required and when email has value then chack email format
+        if(!emailFlag)
+        { emailFormatFlag=(validateEmail(customer.Email))?false:true;
+          setSubmiterEmailFormatError(emailFormatFlag);
+        }
+          if(emailFormatFlag || emailFlag )
+          submitFlag=false;
+
+        if(customerType===1){
+            let submiterNameFlag= (isRealValue(customer.FirstName))?false:true;
+            setSubmiterNameError(submiterNameFlag);
+            let submiterFamilyFlag= (isRealValue(customer.LastName))?false:true;
+            setSubmiterFamilyError(submiterFamilyFlag);
+            let submiterMobileFlag= (isRealValue(customer.MobileNumber))?false:true;
+            setSubmiterMobileError(submiterMobileFlag);
+            let mobileFormatFlag=false;
+            if(!submiterMobileFlag)
+            { mobileFormatFlag=(mobile_format(customer.MobileNumber))?false:true;
+              setSubmiterMobileFormatError(mobileFormatFlag);}
+              if(submiterNameFlag || submiterFamilyFlag || submiterMobileFlag )
+              submitFlag=false;
+             }
+        if(customerType===2){
+            if(isRealValue(customer.MobileNumber) || isRealValue(customer.Code))
+            {
+                if(isRealValue(customer.MobileNumber))
+                {
+                    if(!mobile_format(customer.MobileNumber))
+                    {setContractError(true);
+                      submitFlag=false;      
+                    }
+                    setContractError(false);
+                }
+                else
+                setContractError(false);
+
+            }
+            else{
+                setContractError(true);
+                submitFlag=false;
+            }
+
+        }
+        
+        /* passengers Validations  */
+        //name required validate
+         let nameErrorTemp=nameError;
+         var nameValidate = requiredInput(passengers,nameErrorTemp,"FirstName");
+         setFamilyError(nameValidate[0].slice())
+         if(!nameValidate[1])
+         submitFlag=false;
+         //name latin validate
+         let latinNameErrorTemp=latinNameError;
+         var nameLatinValidate=latinOrPersianValidate(passengers,latinNameErrorTemp,"FirstName",0)
+         setLatinFamilyError(nameLatinValidate[0].slice())
+         if(!nameLatinValidate[1])
+         submitFlag=false;
+
+         //family required validate
+         let familyErrorTemp=familyError;
+         var familyValidate = requiredInput(passengers,familyErrorTemp,"LastName");
+         setFamilyError(familyValidate[0].slice())
+         if(!familyValidate[1])
+         submitFlag=false;
+         //family latin validate
+         let latinFamilyErrorTemp=latinFamilyError;
+         var familyLatinValidate=latinOrPersianValidate(passengers,latinFamilyErrorTemp,"LastName",0)
+         setLatinFamilyError(familyLatinValidate[0].slice())
+         if(!familyLatinValidate[1])
+         submitFlag=false;
+
+        //PERSIAN name required validate
+        let persianNameReqErrorTemp=persianNameReqError;
+        var persianNameReqValidate = requiredInput(passengers,persianNameReqErrorTemp,"PersianFirstName");
+        setPersianNameReqError(persianNameReqValidate[0].slice())
+        if(!persianNameReqValidate[1])
+        submitFlag=false;
+        //PERSIAN name latin validate
+        let persianNameErrorTemp=persianNameError;
+        var persianNameErrorValidate=latinOrPersianValidate(passengers,persianNameErrorTemp,"PersianFirstName",1)
+        setPersianNameError(persianNameErrorValidate[0].slice())
+        if(!persianNameErrorValidate[1])
+        submitFlag=false;
+        //PERSIAN family required validate
+        let persianFamilyReqErrorTemp=persianFamilyReqError;
+        var persianFamilyReqErrorValidate = requiredInput(passengers,persianFamilyReqErrorTemp,"PersianLastName");
+        setPersianFamilyReqError(persianFamilyReqErrorValidate[0].slice())
+        if(!persianFamilyReqErrorValidate[1])
+        submitFlag=false;
+        //PERSIAN family validate
+        let persianFamilyErrorTemp=persianFamilyError;
+        var persianFamilyErrorValidate=latinOrPersianValidate(passengers,persianFamilyErrorTemp,"PersianLastName",1)
+        setPersianFamilyError(persianFamilyErrorValidate[0].slice())
+        if(!persianFamilyErrorValidate[1])
+        submitFlag=false;
+        //mobile required validate
+        let mobileReqErrorTemp=mobileReqError;
+        var CellPhoneNumberValidate = requiredInput(passengers,mobileReqErrorTemp,"CellPhoneNumber");
+        setMobileReqError(CellPhoneNumberValidate[0].slice())
+        if(!CellPhoneNumberValidate[1])
+        submitFlag=false;
+        //mobile format validate
+        let mobileFormatErrorTemp=mobileFormatError;
+        var mobileFormatValidate=mobileFormatInputValidate(passengers,mobileFormatErrorTemp,"CellPhoneNumber",1)
+        setMobileFormatError(mobileFormatValidate[0].slice())
+        if(!mobileFormatValidate[1])
+        submitFlag=false;
+
+
+      
+       // console.log("name latin",latinNameError);
+        //console.log("family latin",latinFamilyError);
+        //console.log("persian name error",persianNameError);
+        //console.log("persian lastName error",persianFamilyError);
+
+        //room choose validation
+        var roomFlag=true;
+        for(var i=0;i<roomCount.length;i++)
+        {
+            let eachRoom=[];
+            eachRoom=passengers.filter((item)=>item.Room===i+1)
+            //console.log("eachRoom",eachRoom)
+            let sumAdult=0;let sumChild1=0;let sumChild2=0;let sumInfant=0;
+            for(var j=0;j<eachRoom.length;j++){
+                if(eachRoom[j].personType==="adult")
+                sumAdult++;
+                if(eachRoom[j].personType==="child1")
+                sumChild1++;
+                if(eachRoom[j].personType==="child2")
+                sumChild2++
+                if(eachRoom[j].personType==="infant")
+                sumInfant++;
+                }
+
+                if(parseInt(sumAdult)>parseInt(roomCount[i].charAt(0)))
+                {
+                    alert(`تعداد بزرگسال اتاق  ${numToWord(i + 1)} بیشتر از مقدار تعیین شده است `)
+                    roomFlag=false;
+                }
+                else if(parseInt(sumAdult)<parseInt(roomCount[i].charAt(0)))
+                {   
+                    alert(` تعداد بزرگسال اتاق  ${numToWord(i + 1)} کمتر از مقدار تعیین شده است `)
+                    roomFlag=false;
+                }
+                else if(parseInt(sumChild1)+parseInt(sumChild2)<parseInt(roomCount[i].charAt(1))+parseInt(roomCount[i].charAt(2)))
+                {   alert(`تعداد کودک اتاق  ${numToWord(i + 1)} کمتر از مقدار تعیین شده است `)
+                    roomFlag=false;
+                }
+                else if(parseInt(sumChild1)+parseInt(sumChild2)>parseInt(roomCount[i].charAt(1))+parseInt(roomCount[i].charAt(2)))
+                {   alert(`تعداد کودک اتاق  ${numToWord(i + 1)} کمتر از مقدار تعیین شده است `)
+                    roomFlag=false;
+                }
+                else if(parseInt(sumInfant)<parseInt(roomCount[i].charAt(3)))
+                {   alert(`تعداد نوزاد اتاق  ${numToWord(i + 1)} کمتر از مقدار تعیین شده است `)
+                    roomFlag=false;
+                }
+                else if(parseInt(sumInfant)>parseInt(roomCount[i].charAt(3)))
+                {   alert(`تعداد نوزاد اتاق  ${numToWord(i + 1)} بیشتر از مقدار تعیین شده است `)
+                    roomFlag=false;
+                }
+                if(!roomFlag)
+                {   
+                    submitFlag=false;
+                    break;
+                }
+        }//end of room validation
+
+
+    //before any request check submitFlag until here
+    // if(!submitFlag)
+    // {
+    //     return false;
+    // }
+    //get customer data
+    let customerTemp=customer;
+    //flag check for submit again by user and prevent for double insert 
+    if(customerFlag)
+    {
+      if(customerType===0 || customerType===1)
+      {
+          let title="";let password="";
+          if(customerType===0)
+          {
+               title=passengers[0].FirstName+" "+passengers[0].LastName;
+               password=passengers[0].CellPhoneNumber;
+          }
+          if(customerType===1)
+          {
+              title=customer.FirstName+" "+customer.LastName;
+              password=customer.MobileNumber;
+
+          }
+          if(isRealValue(title) && isRealValue(password))
+          {
+            await axios.get(`${Ports.domain}${Ports.userRegister}`,{
+                params:{
+                     title:title,
+                     username:customer.Email,
+                     password:password,
+                } 
+             })
+             .then(function (response) {
+                console.log(response);
+               switch (response.status) {
+                 case 200:
+                   return response.data;
+                 default:
+                   return false;
+               }
+             })
+             .catch(function (error) {
+               console.log("error ", error);
+               alert("ایمیل کاربر ثبت کننده تکراری است")
+               submitFlag=false;
+
+             })
+             .then(data => {
+                 if(data===""){
+                     alert("ok") 
+                     if(customerType===0)
+                     {
+                         customerTemp.FirstName=passengers[0].FirstName;  
+                         customerTemp.LastName=passengers[0].LastName;
+                         customerTemp.MobileNumber=  passengers[0].CellPhoneNumber;
+                     }         
+                     setCustomer(customerTemp);
+                     setcustomerFlag(false);
+                     console.log("custumer",customerTemp)
+                 }
+             });
+
+          }
+                 
+      }
+      if(customerType===2)
+      {
+          if(isRealValue(customer.Email) && ( isRealValue(customer.Code) || isRealValue(customer.MobileNumber)))
+          {
+            let loginType = (isRealValue(customer.MobileNumber) && mobile_format(customer.MobileNumber))?"Account":"Contract";
+            let password =  (isRealValue(customer.MobileNumber) && mobile_format(customer.MobileNumber))?customer.MobileNumber : customer.Code;
+            let username = customer.Email;
+            let formBody=new FormData();
+            formBody.append("username",username);
+            formBody.append("password",password);
+            formBody.append("logintype",loginType);
+            await axios.post(`${Ports.domain}${Ports.userLogin}`,formBody)
+             .then(function (response) {
+                console.log(response);
+               switch (response.status) {
+                 case 200:
+                   return response.data;
+                 default:
+                   return false;
+               }
+             })
+             .catch(function (error) {
+               console.log("error ", error);
+               alert("مشخصات کاربر ثبت کننده یافت نشد")
+               submitFlag=false;
+
+             })
+             .then(data => {
+                 if(data==="ERROR"){                    
+                     alert("مشخصات کاربر ثبت کننده یافت نشد")
+                     submitFlag=false;
+                 }
+                 else{
+                     
+                    let fullName=data.Title.split(" ");
+                    let name="";
+                    let family="";
+                    if(fullName.length>1)
+                    {
+                       name=fullName[0];
+                       family=fullName[1];         
+                    }
+                    else{
+                        name=fullName[0];
+                        family=fullName[0];
+                    }
+                    customerTemp = {
+                        CustomerId:data.CustomersId,
+                        FirstName:name,
+                        LastName:family,
+                        Email:data.Email,
+                        MobileNumber:data.MobileNumber,
+                        From:"Site",
+                        Code:customer.Code,
+                    }
+                    console.log("data from user login ",data)     
+                 }
+             });
+
+          }
+        console.log("custumer type 2",customerTemp)     
+      }
+
+  }//customerFlag
+
+let paymentObj=props.paymentObj[0];
+let info = [{
+Flight:[],
+Package:[{
+    Flight:[],
+    Row:[{
+        Flight:[{
+            Going:[{
+                ItemType:paymentObj.Flight.ItemType,
+                AirLineAbbrevation:paymentObj.AirLineAbbrevation_Going,
+                AirLineId:paymentObj.Flight.AirLineId_Going,
+                FileName:paymentObj.Flight.FileName_Going,
+                AirLineTitle:paymentObj.Flight.AirLineTitle_Going,
+                DestAirportAbbrevation:paymentObj.Flight.AirLineAbbrevation_Going,
+                DestAirportTitle:paymentObj.Flight.SourceAirportTitle_Going,
+                DestCityAbbrevation :paymentObj.Flight.DestCityAbbrevation_Going,
+                DestCityTitle:paymentObj.Flight.DestCityTitle_Going,
+                DestCountryAbbrevation:paymentObj.Flight.DestCountryAbbrevation_Going,
+                DestCountryTitle:paymentObj.Flight.DestCountryTitle_Going,
+                FlightDuration:paymentObj.Flight.FlightDuration_Going,
+                FlightNo:paymentObj.Flight.FlightNo_Going,
+                Id:paymentObj.Flight.Id_Going,
+                LocalARRDate:paymentObj.Flight.LocalARRDate_Going,
+                LocalARRTime:paymentObj.Flight.LocalARRTime_Going,
+                LocalDEPDate:paymentObj.Flight.LocalDEPDate_Going,
+                LocalDEPTime:paymentObj.Flight.LocalDEPTime_Going,
+                SourceAirportAbbrevation:paymentObj.Flight.SourceAirportAbbrevation_Going,
+                SourceAirportTitle:paymentObj.Flight.SourceAirportTitle_Going,
+                SourceCityAbbrevation:paymentObj.Flight.SourceCityAbbrevation_Going,
+                SourceCityTitle:paymentObj.Flight.SourceCityTitle_Going,
+                SourceCountryAbbrevation:paymentObj.Flight.SourceCountryAbbrevation_Going,
+                SourceCountryTitle:paymentObj.Flight.SourceCountryTitle_Going,
+                FlightClass:paymentObj.Flight.FlightClassTitle_Going,
+                CityId:paymentObj.Flight.DestCityId_Going,
+                Load:paymentObj.Flight.Load,
+                IsWebService:paymentObj.Flight.IsWebService,
+                WebServiceName:paymentObj.Flight.WebServiceName,
+                B2BID:paymentObj.Flight.B2BID,
+                UserLoginId:paymentObj.Flight.UserLoginId,
+                OnRequest:paymentObj.Flight.OnRequest_Going,
+                DeparturePrice:paymentObj.Flight.DeparturePrice,
+                ReturnPrice:paymentObj.Flight.ReturnPrice,
+                PackageFlightId:paymentObj.Flight.PackageFlightId
+            }],
+            Coming:[{
+                ItemType:paymentObj.Flight.ItemType,
+                AirLineAbbrevation:paymentObj.AirLineAbbrevation_Coming,
+                AirLineId:paymentObj.Flight.AirLineId_Coming,
+                FileName:paymentObj.Flight.FileName_Coming,
+                AirLineTitle:paymentObj.Flight.AirLineTitle_Coming,
+                DestAirportAbbrevation:paymentObj.Flight.AirLineAbbrevation_Coming,
+                DestAirportTitle:paymentObj.Flight.SourceAirportTitle_Coming,
+                DestCityAbbrevation :paymentObj.Flight.DestCityAbbrevation_Coming,
+                DestCityTitle:paymentObj.Flight.DestCityTitle_Coming,
+                DestCountryAbbrevation:paymentObj.Flight.DestCountryAbbrevation_Coming,
+                DestCountryTitle:paymentObj.Flight.DestCountryTitle_Coming,
+                FlightDuration:paymentObj.Flight.FlightDuration_Coming,
+                FlightNo:paymentObj.Flight.FlightNo_Coming,
+                Id:paymentObj.Flight.Id_Coming,
+                LocalARRDate:paymentObj.Flight.LocalARRDate_Coming,
+                LocalARRTime:paymentObj.Flight.LocalARRTime_Coming,
+                LocalDEPDate:paymentObj.Flight.LocalDEPDate_Coming,
+                LocalDEPTime:paymentObj.Flight.LocalDEPTime_Coming,
+                SourceAirportAbbrevation:paymentObj.Flight.SourceAirportAbbrevation_Coming,
+                SourceAirportTitle:paymentObj.Flight.SourceAirportTitle_Coming,
+                SourceCityAbbrevation:paymentObj.Flight.SourceCityAbbrevation_Coming,
+                SourceCityTitle:paymentObj.Flight.SourceCityTitle_Coming,
+                SourceCountryAbbrevation:paymentObj.Flight.SourceCountryAbbrevation_Coming,
+                SourceCountryTitle:paymentObj.Flight.SourceCountryTitle_Coming,
+                FlightClass:paymentObj.Flight.FlightClassTitle_Coming,
+                CityId:paymentObj.Flight.DestCityId_Coming,
+                Load:paymentObj.Flight.Load,
+                IsWebService:paymentObj.Flight.IsWebService,
+                WebServiceName:paymentObj.Flight.WebServiceName,
+                B2BID:paymentObj.Flight.B2BID,
+                UserLoginId:paymentObj.Flight.UserLoginId,
+                OnRequest:paymentObj.Flight.OnRequest_Coming,
+                DeparturePrice:paymentObj.Flight.DeparturePrice,
+                ReturnPrice:paymentObj.Flight.ReturnPrice,
+                PackageFlightId:paymentObj.Flight.PackageFlightId
+            }],
+        }],
+        HotelList:paymentObj.Hotel,
+        HotelPrice:paymentObj.RoomInfo,
+        hotelprice_index:0,
+        Id:paymentObj.PackageHotelRowId,    
+    }],
+    Insurance_AdultPrice:paymentObj.InsuranceAdultPrice,
+    Insurance_OldPrice:paymentObj.InsuranceOldPrice,
+    PackageLength:paymentObj.PackageLength,
+    Id:paymentObj.packageId,
+    AdultCount:paymentObj.Adult,
+    Child1Count:paymentObj.Child1,
+    Child2Count:paymentObj.Child2,
+    InfantCount:paymentObj.Infant,
+    InfantPrice:paymentObj.InfantPrice,
+    RoomRule:paymentObj.RoomRules,
+    RoomRules:paymentObj.RoomRules,   
+}],
+Passengers:passengers,
+Customer:[customerTemp],
+Registration:[],
+ReserveType:"Package",
+CounterId: "",
+Price: paymentObj.TotalPrice,
+PrePayment:0,
+PriceType:"All",
+Discount:0,
+DiscountWithCode:0,
+Description:"",
+PromoCode:"",
+From:"Site",
+CommissionInReserveType:"",
+CommissionValue:-1,
+CurrencyValue:1,
+CurrencyTitle:"ریال",
+CurrencyTypeId: "",
+}]
+//console.log("insertOBJ",info)
+console.log("passengers",JSON.stringify(passengers))
+console.log("info",JSON.stringify(info))
+
+if(!submitFlag)
+{
+    return false;
+}
+await axios.get(`${Ports.domain}${Ports.book}`,{
+    params:{
+        info:JSON.stringify(info),
+        getway_type:"MELLAT",
+        force_payment:true,
+        is_webservice:false,
+        webservice_name:"",
+        IsOnRequest:false,
+        passengers:JSON.stringify(passengers),
+        TrackerUniqueId:"",
+    }
+})
+.then(function (response) {
+   console.log(response);
+  switch (response.status) {
+    case 200:
+      return response.data;
+    default:
+      return false;
+  }
+})
+.catch(function (error) {
+  console.log("error ", error);
+  alert("Error" + error)
+
+})
+.then(data => {
+   console.log("reserv data after form submit", data);
+});
+
+    }//end of handle submit
+
+   function handleUser(e,type) {
+    let value=e.target.value;;
+    if(type==="Email"){
+
+        let emailFlag= (isRealValue(value))?false:true;
+        setSubmiterEmailError(emailFlag);
+        setCustomer({...customer,Email:value})
+        //check format just when user submited (in handleSubmit)
+        setSubmiterEmailFormatError(false);
+    }
+    if(type==="FirstName"){
+        let submiterNameFlag= (isRealValue(value))?false:true;
+        setSubmiterNameError(submiterNameFlag);
+        setCustomer({...customer,FirstName:value})
+    }
+    if(type==="LastName"){
+        let submiterFamilyFlag= (isRealValue(value))?false:true;
+        setSubmiterFamilyError(submiterFamilyFlag);
+        setCustomer({...customer,LastName:value})
+    }
+    if(type==="MobileNumber"){
+        if(customerType===1)
+        {
+            let submiterMobileFlag= (isRealValue(value))?false:true;
+            setSubmiterMobileError(submiterMobileFlag);
+        }
+        if(customerType===2)
+        {
+            let submiterMobileFlag= (isRealValue(value))?false:true;
+            setContractError(submiterMobileFlag);
+        }
+        setCustomer({...customer,MobileNumber:value})
+    }
+    if(type==="Code"){
+        if(customerType===2)
+        {
+            let submiterCodeFlag= (isRealValue(value))?false:true;
+            setContractError(submiterCodeFlag);
+        }
+        setCustomer({...customer,Code:value})
+    }
+   }
+    console.log("passengers", passengers)
+    console.log("customer", customer)
+
+    return (
+        <div className="info-form">
+            <p className="desc-tag">
+                <IoMdInformationCircle />
+                لطفا اطلاعات زیر را کامل کنید :
+            </p>
+            <MDBCard>
+                <MDBCardBody>
+                    <div className="travelers-info">
+                        <span>
+                            یکی از مسافران
+                            :
+                        </span>
+                        <label>
+                            <input type="radio" value="a" name="travelers" checked={iAm} onChange={onSetIamChanged} />
+                            <span className="checkmark"></span>
+                            <span>هستم</span>
+
+                        </label>
+                        <label>
+                            <input type="radio" name="travelers" value="b" checked={iAmnot} onChange={onSetIamNotChanged} />
+                            <span className="checkmark"></span>
+                            <span>نیستم</span>
+
+                        </label>
+                        <label>
+                            <input type="radio" name="travelers" value="c" checked={before} onChange={onSetBeforeChanged} />
+                            <span className="checkmark"></span>
+                            <span>قبلا خرید انجام داده ام</span>
+
+                        </label>
+                    </div>
+                    <Form>
+                        {(iAm) ?
+                            <Row form>
+                                <Col md={4}>
+                                    <FormGroup>
+                                        <Label for="user_email">ایمیل :</Label>
+                                        <Input style={(submiterEmailError || submiterEmailFormatError)?errorBorder:{}} onChange={(e) => handleUser(e,"Email")} value={customer.Email} type="email" name="user_email" id="user_email" placeholder="" />
+                                        {(submiterEmailError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>ایمیل را وارد کنید</span>:""}
+                                        {(submiterEmailFormatError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>فرمت ایمیل نادرست است</span>:""}
+                                    </FormGroup>
+                                </Col>
+
+                            </Row>
+                            :
+                            <>
+                                {(iAmnot) ?
+                                    <Row form>
+                                        <Col md={3}>
+                                            <FormGroup>
+                                                <Label for="user_name">نام :</Label>
+                                                <Input style={(submiterNameError)?errorBorder:{}}  onChange={(e) => handleUser(e,"FirstName")} value={customer.FirstName}  type="text" name="user_name" id="user_name" placeholder="" />
+                                                {(submiterNameError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>نام را وارد کنید</span>:""}
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={3}>
+                                            <FormGroup>
+                                                <Label for="user_family">نام خانوادگی :</Label>
+                                                <Input  style={(submiterFamilyError)?errorBorder:{}} onChange={(e) => handleUser(e,"LastName")} value={customer.LastName} type="text" name="user_family" id="user_family" placeholder="" />
+                                                {(submiterFamilyError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>نام خانوادگی را وارد کنید</span>:""}
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={3}>
+                                            <FormGroup>
+                                                <Label for="user_mobile">موبایل :</Label>
+                                                <Input  style={( submiterMobileError || submiterMobileFormatError )?errorBorder:{}}  onChange={(e) => handleUser(e,"MobileNumber")} value={customer.MobileNumber} type="email" name="user_mobile" id="user_mobile" placeholder="" />
+                                                {(submiterMobileError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>موبایل را وارد کنید</span>:""}
+                                                {(submiterMobileFormatError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>فرمت موبایل نادرست است</span>:""}
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={3}>
+                                            <FormGroup>
+                                                <Label for="user_email1">ایمیل :</Label>
+                                                <Input style={(submiterEmailError || submiterEmailFormatError)?errorBorder:{}} onChange={(e) => handleUser(e,"Email")} value={customer.Email} type="email" name="user_email1" id="user_email1" placeholder="" />
+                                                {(submiterEmailError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>ایمیل را وارد کنید</span>:""}
+                                                {(submiterEmailFormatError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>فرمت ایمیل نادرست است</span>:""}
+                                            </FormGroup>
+                                        </Col>
+
+                                    </Row>
+                                    :
+                                    <Row form>
+                                        <Col md={4}>
+                                            <FormGroup>
+                                                <Label for="user_email2">ایمیل :</Label>
+                                                <Input style={(submiterEmailError || submiterEmailFormatError)?errorBorder:{}} onChange={(e) => handleUser(e,"Email")} value={customer.Email} type="email" name="user_email2" id="user_email2" placeholder="" />
+                                                {(submiterEmailError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>ایمیل را وارد کنید</span>:""}
+                                                 {(submiterEmailFormatError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>فرمت ایمیل نادرست است</span>:""}
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={4}>
+                                            <FormGroup>
+                                                <Label for="MobileNumber">موبایل :</Label>
+                                                <Input className="mobileContract" style={( contractError && mobileReqError )?errorBorder:{}}   onChange={(e) => handleUser(e,"MobileNumber")} value={customer.MobileNumber} type="text" name="MobileNumber" id="MobileNumber" placeholder=""  />
+                                                {(contractError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>موبایل یا شماره قرارداد را وارد کنید</span>:""}
+                                            </FormGroup>
+                                            <span className="or">
+                                                یا
+                                    </span>
+                                        </Col>
+                                        <Col md={4}>
+                                            <FormGroup>
+                                                <Label for="code">شماره قرارداد :</Label>
+                                                <Input   style={( contractError )?errorBorder:{}} onChange={(e) => handleUser(e,"Code")} value={customer.Code} type="text" name="code" id="code" placeholder="" />
+                                                {(contractError)?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>موبایل یا شماره قرارداد را وارد کنید</span>:""}
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                }
+
+                            </>}
+
+                    </Form>
+
+
+                    <Form id="form1">
+                        {
+                            passengers.map((person, idx) => {
+
+                                return (
+                                    <div key={IDBIndex.toString()}>
+                                        <hr />
+                                        <div className="passenger-tag">
+                                            <span>
+                                                مسافر {numToWord(idx + 1)} - {personType(person.personType)}
+                                            </span>
+
+                                        </div>
+                                        <Row form>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                 <Label for="FirstName">نام :</Label>
+                                                    <Input style={(nameError[idx] || latinNameError[idx])?errorBorder:{}} type="text" value={person.FirstName} onChange={(e) => handleInputChange(e, idx, "FirstName")} name="FirstName" id="FirstName" placeholder="نام به لاتین" />
+                                                    {(nameError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/> فیلد نام اجباریست </span>:""}
+                                                    {(latinNameError[idx])?<span className="pr-1 small text-danger"><TiSortAlphabetically size="15"/> نام لاتین وارد شود </span>:""}
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label for="LastName">نام خانوادگی :</Label>
+                                                    <Input style={(familyError[idx] || latinFamilyError[idx])?errorBorder:{}} type="text" value={person.LastName} onChange={(e) => handleInputChange(e, idx, "LastName")} name="LastName" id="LastName" placeholder="نام خانوادگی به لاتین" />
+                                                    {(familyError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/> فیلد نام خانوادگی اجباریست </span>:""}
+                                                    {(latinFamilyError[idx])?<span className="pr-1 small text-danger"><TiSortAlphabetically size="15"/> نام خانوادگی لاتین وارد شود </span>:""}
+                                                </FormGroup>
+                                            </Col>
+                                            {/* <Col md={4}>
+                                                <FormGroup>
+                                                    <Label for="PersianFirstName">نام :</Label>
+                                                    <Input style={(persianNameReqError[idx] || persianNameError[idx])?errorBorder:{}} type="text" value={person.PersianFirstName} onChange={(e) => handleInputChange(e, idx, "PersianFirstName")} name="PersianFirstName" id="PersianFirstName" placeholder="نام به فارسی" />
+                                                    {(persianNameReqError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/> فیلد نام اجباریست </span>:""}
+                                                    {(persianNameError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/> نام فارسی وارد شود </span>:""}
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label for="PersianLastName">نام خانوادگی :</Label>
+                                                    <Input style={(persianFamilyReqError[idx] || persianFamilyError[idx] )?errorBorder:{}} type="text" value={person.PersianLastName} onChange={(e) => handleInputChange(e, idx, "PersianLastName")} name="PersianLastName" id="PersianLastName" placeholder="نام خانوادگی به فارسی" />
+                                                    {(persianFamilyReqError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/> فیلد نام خانوادگی اجباریست </span>:""}
+                                                    {(persianFamilyError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/> نام خانوادگی فارسی وارد شود </span>:""}
+                                                </FormGroup>
+                                            </Col> */}
+                                            <Col md={2}>
+                                                <FormGroup>
+                                                    <Label for="Gender">جنسیت :</Label>
+                                                    <Input value={person.Gender} onChange={(e) => handleInputChange(e, idx, "Gender")} type="select" name="Gender" id="Gender" placeholder="">
+                                                        <option value={0}>زن</option>
+                                                        <option value={1}>مرد</option>
+
+                                                    </Input>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={2}>
+                                                <FormGroup >
+                                                    <Label for="melliCode">اتاق :</Label>
+                                                    <Input value={person.Room} onChange={(e) => handleInputChange(e, idx, "Room")} type="select" name="Room" id="Room">
+                                                        {
+                                                            roomCount.map((_, index) => {
+                                                                return (
+                                                                    <option value={index + 1}>{index + 1}</option>
+
+                                                                )
+                                                            })
+                                                        }
+                                                    </Input>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label for="Nationality">تابعیت :</Label>
+                                                    <Input value={person.NationalityCode} onChange={(e) => handleInputChange(e, idx, "Nationality")} type="select" name="Nationality" id="Nationality" placeholder="">
+                                                        
+                                                        {Countries.map((cnt)=>{
+                                                            return(
+                                                            <option key={cnt.code.toString()} value={cnt.code}>{cnt.name}</option>
+                                                            )
+                                                        })}
+                                                      
+                                                    </Input>
+                                                </FormGroup>
+                                            </Col>
+                                          
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label for="CellPhoneNumber">موبایل :</Label>
+                                                    <Input  style={(mobileReqError[idx] || mobileFormatError[idx] )?errorBorder:{}} value={person.CellPhoneNumber} onChange={(e) => handleInputChange(e, idx, "CellPhoneNumber")} type="text" name="CellPhoneNumber" id="CellPhoneNumber" placeholder="" />
+                                                    {(mobileReqError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>موبایل را وارد کنید</span>:""}
+                                                    {(mobileFormatError[idx])?<span className="pr-1 small text-danger"><IoIosWarning size="15"/>فرمت موبایل نادرست است</span>:""}
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={4}>
+                                                <Label for="BirthDate">تاریخ تولد :</Label>
+                                                <Row className="px-3 BirthDate">
+
+                                                    <FormGroup className="w-24">
+                                                        <Input value={person.bDay} onChange={(e) => handleInputChange(e, idx, "bDay")} type="text" name="bDay" id="bDay" placeholder="روز" />
+                                                    </FormGroup>
+
+                                                    <FormGroup className="w-24">
+                                                        <Input value={person.bMonth} onChange={(e) => handleInputChange(e, idx, "bMonth")} type="text" name="bMonth" id="bMonth" placeholder="ماه" />
+                                                    </FormGroup>
+
+                                                    <FormGroup className="w-24">
+                                                        <Input value={person.bYear} onChange={(e) => handleInputChange(e, idx, "bYear")} type="text" name="bYear" id="bYear" placeholder="سال" />
+                                                    </FormGroup>
+
+                                                    <FormGroup className="w-24">
+                                                        <Input value={person.birthType} onChange={(e) => handleInputChange(e, idx, "birthType")} type="select" name="birthType" id="birthType">
+                                                            <option value={0}>شمسی</option>
+                                                            <option value={1}>میلادی</option>
+                                                        </Input>
+                                                    </FormGroup>
+
+                                                </Row>
+
+                                            </Col>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label for="CardType">ثبت با :</Label>
+                                                    <Input value={person.cardType} onChange={(e) => handleInputChange(e, idx, "cardType")} type="select" name="cardType" id="submit_with" placeholder="">
+                                                        <option value={0}>کد ملی</option>
+                                                        <option value={1}>شماره پاسپورت</option>
+                                                    </Input>
+                                                </FormGroup>
+                                            </Col>
+                                            {
+                                                (person.cardType) ?
+                                                    <>
+                                                        <Col md={4}>
+                                                            <FormGroup>
+                                                                <Label for="PassportNo">شماره پاسپورت :</Label>
+                                                                <Input value={person.PassportNo} onChange={(e) => handleInputChange(e, idx, "PassportNo")} type="text" name="PassportNo" id="PassportNo" placeholder="" />
+                                                            </FormGroup>
+                                                        </Col>
+                                                        <Col md={4}>
+                                                            <Label for="PassportExpirationDate">انقضاء پاسپورت :</Label>
+                                                            <Row className="px-3 PassportExpirationDate">
+                                                                <FormGroup className="w-24">
+                                                                    <Input value={person.pDay} onChange={(e) => handleInputChange(e, idx, "pDay")} type="text" name="pDay" id="pDay" placeholder="روز" />
+                                                                </FormGroup>
+
+                                                                <FormGroup className="w-24">
+                                                                    <Input value={person.pMonth} onChange={(e) => handleInputChange(e, idx, "pMonth")} type="text" name="pMonth" id="pMonth" placeholder="ماه" />
+                                                                </FormGroup>
+
+                                                                <FormGroup className="w-24">
+                                                                    <Input value={person.pYear} onChange={(e) => handleInputChange(e, idx, "pYear")} type="text" name="pYear" id="pYear" placeholder="سال" />
+                                                                </FormGroup>
+
+                                                                <FormGroup className="w-24">
+                                                                    <Input value={person.passExType} onChange={(e) => handleInputChange(e, idx, "passExType")} type="select" name="passExType" id="passExType">
+                                                                        <option value={0}>میلادی</option>
+                                                                        <option value={1}>شمسی</option>
+                                                                    </Input>
+                                                                </FormGroup>
+
+                                                            </Row>
+                                                        </Col>
+                                                    </> :
+                                                    <Col md={4}>
+                                                        <FormGroup>
+                                                            <Label for="melliCode">کد ملی :</Label>
+                                                            <Input value={person.melliCode} onChange={(e) => handleInputChange(e, idx, "melliCode")} type="text" name="melliCode" id="melliCode" placeholder="" />
+                                                        </FormGroup>
+                                                    </Col>
+                                            }
+                                        </Row>
+                                        <Row>
+                                          
+                                        </Row>
+                                    </div>
+                                )
+                            })
+                        }
+                    </Form>
+                    <hr />
+                    <div className="rule-accept">
+                        <p>
+                            <IoMdInformationCircle />
+                            <span className="title">
+                                قوانین و مقررات :
+                            </span>
+                        </p>
+                        <label className="container">
+                            <span>
+                                شرایط و قوانین
+                            </span>
+                            را مطالعه کرده و با کلیه موارد موافقم.
+                            <input type="checkbox" />
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="passenger-tag">
+                                <span >
+                                    انتخاب درگاه پرداخت
+                                </span>
+                            </div>
+                            <div className="bank-pose">
+                                <label className="container">
+                                    <img src={require('../../img/mellat.png')} />
+                                    <input type="radio" checked="checked" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="passenger-tag">
+                                <span >
+                                    قیمت نهایی
+                                </span>
+                            </div>
+                            <div className="last-price">
+                                <div>
+                                    <span className="label">
+                                        جمع کل قیمت :
+                                    </span>
+                                    <span>
+                                       {HotelPriceFormat(props.paymentObj[0].TotalPrice)}
+                                        ریال
+                                    </span>
+                                </div>
+                                <div>
+                                    <span className="label">
+                                        مبلغ قابل پرداخت  :
+                                    </span>
+                                    <span>
+                                    {HotelPriceFormat(props.paymentObj[0].TotalPrice)}
+                                        ریال
+                                    </span>
+                                </div>
+                                <hr />
+                            </div>
+                            <div className="off-code">
+                                <span>
+                                    کد تخفیف :
+                                </span>
+
+                                <InputGroup size="sm">
+                                    <Input />
+                                </InputGroup>
+                                <button className="btn">
+                                    اعمال
+                                </button>
+
+                            </div>
+
+                        </div>
+                        <div className="col-md-12">
+                            <div className="pay-btns">
+                                <button form="form1" onClick={handleForm} className="btn green-btn">
+                                    پرداخت
+                                </button>
+                                <button className="btn">
+                                    انصراف
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </MDBCardBody>
+            </MDBCard>
+        </div>
+    )
+}
+
+const SearchAgain = (props) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
+    return (
+        <div>
+            <div className="search-again">
+                <Container>
+                    <div className="row">
+                        <div className="col-md-9 no-padding">
+                            <span className="source-plane">
+                                <IoIosAirplane />
+                            </span>
+                            <span>
+                                بلیط هواپیما Tehran به Bangkok
+                            </span>
+                            <span>
+                                |
+                            </span>
+                            <span>
+                                رفت : جمعه 10 آبان
+                            </span>
+                        </div>
+                        <div className="col-md-3 no-padding">
+                            <button className="btn search-again-btn" onClick={toggle}>
+                                جستجوی مجدد
+                                <span style={{ paddingRight: 5 }}>
+                                    <IoMdSearch />
+                                </span>
+                            </button>
+
+                        </div>
+
+                    </div>
+                </Container>
+            </div>
+            <div className="bg-white">
+                <Container>
+                    <Collapse isOpen={isOpen}>
+                        <div>
+
+                            <TourSearch />
+
+                        </div>
+                    </Collapse>
+                </Container>
+            </div>
+        </div>
+
+
+
+    )
+}
+const Payment = (props) => {
+    console.log("paymentValue in Payment CM:", props.paymentObj)
+    return (
+        <div className="tour-payment">
+            <Container>
+                <div className="payment">
+                    <div className="row">
+                        <div className="col-md-9">
+                            <ChosenCard {...props} />
+                        </div>
+                        <div className="col-md-3 pr-0-lg">
+                            <div className="timer">
+                                <Countdown date={Date.now() + 1500000} renderer={renderer} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <InfoForm {...props} />
+                </div>
+
+            </Container>
+        </div>
+    )
+}
+const mapStateToProps = state => {
+    const paymentObj = state.paymenObject.paymentObj;
+    return { paymentObj }
+}
+export default connect(mapStateToProps)(Payment);

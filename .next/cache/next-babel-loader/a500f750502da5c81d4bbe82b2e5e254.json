@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var actionTypes = {\n  HEAFER_FAILURE: 'HEAFER_FAILURE',\n  LOAD_HEADER: 'LOAD_HEADER',\n  LOAD_HEADER_SUCCESS: 'LOAD_HEADER_SUCCESS',\n  Tour_FAILURE: 'Tour_FAILURE',\n  LOAD_Tour: 'LOAD_Tour',\n  LOAD_Tour_SUCCESS: 'LOAD_Tour_SUCCESS'\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,20 @@
+@mixin insert-font-face($font-family...) {
+    @each $param in $font-family{
+        @font-face {
+            font-family: "#{$param}";
+            src: url('./dist/iransansweb/#{$param}.ttf');
+            src: url('./dist/iransansweb/#{$param}.eot') format('embedded-opentype'),
+                 url('./dist/iransansweb/#{$param}.woff') format('woff'),
+                 url('./dist/iransansweb/#{$param}.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    }
+	
+}
+@mixin placeholders {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder           {@content}
+    &::-moz-placeholder          {@content}
+    &:-ms-input-placeholder      {@content} 
+}

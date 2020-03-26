@@ -1,0 +1,6 @@
+export const actionTypes = {
+    WEBLOG_FAILURE: 'WEBLOG_FAILURE',
+    LOAD_WEBLOG: 'LOAD_WEBLOG',
+    LOAD_WEBLOG_SUCCESS: 'LOAD_WEBLOG_SUCCESS',
+  }
+  

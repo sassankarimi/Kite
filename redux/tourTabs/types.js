@@ -1,0 +1,9 @@
+export const actionTypes = {
+    HEAFER_FAILURE: 'HEAFER_FAILURE',
+    LOAD_HEADER: 'LOAD_HEADER',
+    LOAD_HEADER_SUCCESS: 'LOAD_HEADER_SUCCESS',
+    Tour_FAILURE: 'Tour_FAILURE',
+    LOAD_Tour: 'LOAD_Tour',
+    LOAD_Tour_SUCCESS: 'LOAD_Tour_SUCCESS',
+  }
+  

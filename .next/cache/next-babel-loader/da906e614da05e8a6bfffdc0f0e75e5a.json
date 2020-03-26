@@ -1,0 +1,1 @@
+{"ast":null,"code":"const ADD = \"ADD\";\nconst REMOVE = \"REMOVE\";\n\nconst add = value => ({\n  type: ADD,\n  value\n});\n\nconst remove = () => ({\n  type: REMOVE,\n  value: []\n});\n\nexport { add, remove };","map":null,"metadata":{},"sourceType":"module"}

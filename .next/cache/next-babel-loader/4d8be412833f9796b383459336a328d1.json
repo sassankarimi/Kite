@@ -1,0 +1,1 @@
+{"ast":null,"code":"var ADD = \"ADD\";\nvar REMOVE = \"REMOVE\";\n\nvar add = function add(value) {\n  return {\n    type: ADD,\n    value: value\n  };\n};\n\nvar remove = function remove() {\n  return {\n    type: REMOVE,\n    value: []\n  };\n};\n\nexport { add, remove };","map":null,"metadata":{},"sourceType":"module"}

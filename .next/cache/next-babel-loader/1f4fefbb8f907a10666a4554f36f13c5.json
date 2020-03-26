@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nconst BgText = () => {\n  return __jsx(\"div\", {\n    className: \"background-text\"\n  }, __jsx(\"img\", {\n    src: require(\"../img/bgtext.png\")\n  }));\n};\n\nexport default BgText;","map":null,"metadata":{},"sourceType":"module"}

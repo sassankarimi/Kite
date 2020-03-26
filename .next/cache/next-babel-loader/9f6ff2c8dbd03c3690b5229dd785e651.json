@@ -1,0 +1,1 @@
+{"ast":null,"code":"var routes = require('next-routes');\n\nmodule.exports = routes().add('/:noname/:lang(en|es)/:wow+', 'complex');","map":null,"metadata":{},"sourceType":"script"}

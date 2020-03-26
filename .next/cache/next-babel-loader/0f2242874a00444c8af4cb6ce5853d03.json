@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var STARS = 'STARS';\nexport var RATES = 'RATES';\nexport var PRICE = 'PRICE';\nexport var CO = 'CO';","map":null,"metadata":{},"sourceType":"module"}

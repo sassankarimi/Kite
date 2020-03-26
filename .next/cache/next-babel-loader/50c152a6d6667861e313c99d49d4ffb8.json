@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const actionTypes = {\n  SEARCH_TOUR_FAILURE: 'SEARCH_TOUR_FAILURE',\n  LOAD_SEARCH_TOUR: 'LOAD_SEARCH_TOUR',\n  LOAD_SEARCH_TOUR_SUCCESS: 'LOAD_SEARCH_TOUR_SUCCESS',\n  SET_FILTERED_RESULTS: 'SET_FILTERED_RESULTS',\n  SET_SEARCH_PARAMS: 'SET_SEARCH_PARAMS'\n};","map":null,"metadata":{},"sourceType":"module"}

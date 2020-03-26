@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const STARS = 'STARS';\nexport const RATES = 'RATES';\nexport const PRICE = 'PRICE';\nexport const CO = 'CO';","map":null,"metadata":{},"sourceType":"module"}
