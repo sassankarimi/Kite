@@ -22,7 +22,7 @@
     "@types/lodash": "^4.14.149",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "base-64": "^0.1.0",
     "bootstrap": "^4.3.1",
     "es6-promise": "^4.2.8",
